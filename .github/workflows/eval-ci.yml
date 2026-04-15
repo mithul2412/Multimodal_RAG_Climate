@@ -84,29 +84,3 @@ jobs:
             per_query.jsonl
             eval_output.log
           retention-days: 30
-
-      # ---- Format + Send Email ----
-      - name: Format email report
-        id: format_email
-        if: always()
-        run: |
-          python format_email.py \
-            --input eval_results_comprehensive.json \
-            --branch "${{ github.ref_name }}" \
-            --commit "${{ github.sha }}" \
-            --repo "${{ github.repository }}" \
-            > email_body.html
-
-      - name: Send email to collaborators
-        if: always() && steps.format_email.outcome == 'success'
-        uses: dawidd6/action-send-mail@v3
-        with:
-          server_address: ${{ secrets.SMTP_SERVER }}
-          server_port: ${{ secrets.SMTP_PORT }}
-          username: ${{ secrets.SMTP_USERNAME }}
-          password: ${{ secrets.SMTP_PASSWORD }}
-          subject: "RAG Eval Results — ${{ env.SAFE_BRANCH }} @ ${{ github.sha }}"
-          to: asaikiranb@gmail.com, balaji24@uw.edu, mithul24@uw.edu, rohith02@uw.edu, sagorika@uw.edu, annangi@uw.edu
-          from: "RAG Eval Bot <${{ secrets.SMTP_USERNAME }}>"
-          html_body: file://email_body.html
-          attachments: eval_results_comprehensive.json
