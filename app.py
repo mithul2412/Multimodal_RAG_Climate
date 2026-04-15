@@ -12,6 +12,9 @@ from typing import Any
 import numpy as np
 from PIL import Image, ImageDraw, ImageOps, ImageFilter
 
+import sys as _sys
+_sys.path.insert(0, str(Path(__file__).resolve().parent / "src"))
+
 from retrieve_v2 import HybridRetrieverV2
 from rerank_v2 import TwoStageCalibratedReranker
 from llm import GenerationClient

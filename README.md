@@ -86,7 +86,7 @@ cp .env.example .env
 **Ingest documents.** Point the ingest script at a folder of PDFs. Use `chroma` or `qdrant` as the backend.
 
 ```bash
-python ingest_v2.py --source-dir ./Eval\ Dataset --backend qdrant
+python src/ingest_v2.py --source-dir ./Eval\ Dataset --backend qdrant
 ```
 
 **Run the app.** Start the Streamlit server and open the URL in your browser.
@@ -127,9 +127,22 @@ The app ingests PDFs. Training manuals, protocol documents, safety guides, and i
 
 ---
 
+## Project Layout
+
+```text
+app.py                 Streamlit entry point (streamlit run app.py)
+src/                   ingestion, retrieval, reranking, LLM, and CLI modules
+eval/                  evaluation framework (metrics, runner, contracts)
+tests/                 unit tests
+docs/                  images and engineering/design notes
+chroma_db/, qdrant_db_ci/, v3_yolo11m/   committed vector indices and model weights
+```
+
+---
+
 ## Configuration
 
-Set `GROQ_API_KEY` in `.env` for LLM generation. Choose a vector backend in `config.py` (`chroma` or `qdrant`). Sparse mode can be `bm42` or `splade` depending on your setup. Change `--source-dir` to point at your own document folder.
+Set `GROQ_API_KEY` in `.env` for LLM generation. Choose a vector backend in `src/config.py` (`chroma` or `qdrant`). Sparse mode can be `bm42` or `splade` depending on your setup. Change `--source-dir` to point at your own document folder.
 
 ---
 
@@ -138,7 +151,7 @@ Set `GROQ_API_KEY` in `.env` for LLM generation. Choose a vector backend in `con
 For benchmarking and reproducibility:
 
 ```bash
-python run_contextual_eval.py --output results.json
+python src/run_contextual_eval.py --output results.json
 python -m eval.run --input eval/golden.csv --out eval_out/upgraded --profile upgraded
 ```
 

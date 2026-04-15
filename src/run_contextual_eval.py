@@ -11,8 +11,12 @@ Usage:
 
 import json
 import argparse
+import sys
 import time
+from pathlib import Path
 from typing import List, Dict
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from retrieve import HybridRetriever
 from rerank import CrossEncoderReranker
@@ -167,4 +171,4 @@ if __name__ == "__main__":
     parser.add_argument("--limit", type=int, default=None)
     parser.add_argument("--retrieval-only", action="store_true", help="Run only retrieval (+ reranker) metrics, no generation or LLM judge")
     args = parser.parse_args()
-    EvaluationEngine().run("contextual_eval_dataset.jsonl", args.output, limit=args.limit, retrieval_only=args.retrieval_only)
+    EvaluationEngine().run("eval/contextual_eval_dataset.jsonl", args.output, limit=args.limit, retrieval_only=args.retrieval_only)
