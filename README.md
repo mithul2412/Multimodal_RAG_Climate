@@ -72,8 +72,8 @@ The app supports ChromaDB for local runs and Qdrant for scaled deployments. User
 **Clone and install.** Clone the repository and install dependencies.
 
 ```bash
-git clone https://github.com/asaikiranb/RAG-climate.git
-cd RAG-climate
+git clone https://github.com/mithul2412/Multimodal_RAG_Climate.git
+cd Multimodal_RAG_Climate
 pip install -r requirements.txt
 ```
 
