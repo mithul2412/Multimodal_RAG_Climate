@@ -1,4 +1,4 @@
-# Retrieval Augmented Generation for Climate Challenges
+# Multimodal RAG for Climate Challenges
 
 **University of Washington · MS Data Science Capstone Project · March 2026**  
 **Mentor:** [Abhishek Varma](https://www.linkedin.com/in/abhishekvarma2/)  
